@@ -23,6 +23,8 @@ tf = time.time() - t0
 
 print(f'Tiempo total de ejecucion: {tf}')
 """
+
+"""
 print("hilo principal o 1 hilo")
 print()
 def contador (inicio, fin):
@@ -67,7 +69,9 @@ tf= time.time() - t0
 print(f'Tiempo de ejecucion: {tf}')
 print(globalArrayNum)
 print("-----------------------------")
+"""
 
+"""
 print("Usando 4 hilos")
 print()
 
@@ -99,5 +103,39 @@ for t in listaHilos:
 tf= time.time() - t0
 
 print(f'Tiempo de ejecucion: {tf}')
+globalArrayNum.sort()
 print(globalArrayNum)
 print("-----------------------------")
+"""
+print("Usando 4 hilos")
+print()
+
+globalArrayNum = []
+def contador3 ( inicio, fin, saltos ):
+    for i in range (inicio, fin+1, 1):
+        globalArrayNum.append(i)
+        time.sleep(0.01)
+    return 0
+
+t0 = time.time()
+listaHilos = []
+
+inicio = 1
+fin = inicio+25
+    if fin>inicio:
+        inicio=fin
+
+for i in range(inicio, fin):
+    t = threading.Thread(target=contador3, args=(1,100,25))
+    listaHilos.append(t)
+    t.start()
+    for t in listaHilos:
+        t.join()
+
+
+
+tf= time.time() - t0
+
+print(f'Tiempo de ejecucion: {tf}')
+#globalArrayNum.sort()
+print(globalArrayNum)
