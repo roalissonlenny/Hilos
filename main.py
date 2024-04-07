@@ -111,8 +111,9 @@ print("Usando 4 hilos")
 print()
 
 globalArrayNum = []
-def contador3 ( inicio, fin, saltos ):
-    for i in range (inicio, fin+1, 1):
+
+def contador3(inicio, fin, incremento):
+    for i in range(inicio, fin + 1, incremento):
         globalArrayNum.append(i)
         time.sleep(0.01)
     return 0
@@ -121,21 +122,21 @@ t0 = time.time()
 listaHilos = []
 
 inicio = 1
-fin = inicio+25
-    if fin>inicio:
-        inicio=fin
+fin = 101
+incremento = 1  
 
-for i in range(inicio, fin):
-    t = threading.Thread(target=contador3, args=(1,100,25))
+for i in range(inicio, fin, incremento):
+    t = threading.Thread(target=contador3, args=(i, i + incremento - 1, incremento))
     listaHilos.append(t)
     t.start()
-    for t in listaHilos:
-        t.join()
 
+for t in listaHilos:
+    t.join()
 
-
-tf= time.time() - t0
+tf = time.time() - t0
 
 print(f'Tiempo de ejecucion: {tf}')
-#globalArrayNum.sort()
 print(globalArrayNum)
+
+
+
